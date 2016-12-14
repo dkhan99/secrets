@@ -1,0 +1,50 @@
+<h1><%= @user.name %></h1>
+
+<%= form_for @secret do |f| %>
+  <%= f.label :secret %>:
+  <%= f.text_area :content %><br />
+
+  <%= f.hidden_field :user_id, value: @user.id %> <br>
+  
+
+  <%= f.submit %>
+<% end %>
+<hr>
+
+<h2>My Secrets</h2>
+<% @secrets.each do |secret| %>
+	<p> <%= secret.content %> 
+
+		<%= link_to 'Delete', secret, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<p>  Likes:<%= secret.likes.count(:all) %>!</p>
+			
+	</p>
+<%end %>
+
+<hr>
+<!-- 
+<h2>My Secrets</h2>
+<% @user.secrets.each do |secret| %>
+	<p> <%= secret.content %> 
+
+		<%= link_to 'Delete', secret, method: :delete, data: { confirm: 'Are you sure?' } %>
+		<p>  Likes:<%= secret.likes.count(:all) %>!</p>
+			
+	</p>
+<%end %>
+
+<hr> -->
+
+<h2>Secrets Liked:</h2>
+	<% @user.likes.each do |like| %>
+		
+			<p> <%= like.secret.content %> 
+			<p>  Likes:<%= like.secret.likes.count(:all) %>!</p>
+
+			</p>
+	<%end %>
+<a href="/sessions/<%= session[:user_id] %>" data-method="delete">Log Out</a>
+<!--  <%= link_to 'Back', :back %> -->
+
+<%= link_to 'Main Page', secrets_path %>
+

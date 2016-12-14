@@ -1,0 +1,26 @@
+<h1>Register</h1>
+
+<form action="/user" method="post">
+	<label>
+		Email: <input type="text" name="user[email]">
+	</label><br>
+	<label>
+		Name: <input type="text" name="user[name]">
+	</label><br>
+	<label>
+		Password: <input type="password" name="user[password]">
+	</label><br>
+	<label>
+		Password Confirmation: <input type="password" name="user[password_confirmation]">
+	</label><br>
+	<input type="submit" name="Register" value="Log In">
+	<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+</form>
+
+<% if flash[:errors] %>
+	
+	<% flash[:errors].each do |error| %>
+	<p><%= error %></p>	
+	<% end %>
+<% end %>
+
